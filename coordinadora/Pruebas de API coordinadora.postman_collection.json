@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "48286a25-d301-4ad1-940f-896613066f41",
+		"name": "Pruebas de API coordinadora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32502722"
+	},
+	"item": [
+		{
+			"name": "coordinadora Apis pruebas 1 2 y 5 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"//VALIDACIÓN 1\r",
+							"pm.test(\"Validar que el campo 'direccion' sea alfanumérico y obligatorio\", function() {\r",
+							"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+							"    pm.expect(requestBody.direccion).to.match(/^[a-z0-9\\s#]+$/i, \"El campo 'direccion' debe ser alfanumérico\");\r",
+							"    pm.expect(requestBody.direccion).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACIÓN 2\r",
+							"pm.test(\"Validar que 'fechaRecogida' sea alfanumérico y en formato yyyy-mm-dd\", function() {\r",
+							"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+							"    pm.expect(requestBody.fechaRecogida).to.match(/^\\d{4}-\\d{2}-\\d{2}$/, \"El campo 'fechaRecogida' debe estar en formato yyyy-mm-dd\");\r",
+							"    pm.expect(requestBody.fechaRecogida).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"//VALIDACIÓN 3\r",
+							"pm.test(\"Validar campos adicionales obligatorios y alfanuméricos\", function() {\r",
+							"    let requestBody = JSON.parse(pm.request.body.raw);\r",
+							"    pm.expect(requestBody.nombreEntrega).to.match(/^[a-z0-9\\s]+$/i);\r",
+							"    pm.expect(requestBody.apellidosEntrega).to.match(/^[a-z0-9\\s]+$/i);\r",
+							"    pm.expect(requestBody.celularEntrega).to.match(/^[a-z0-9]+$/i);\r",
+							"    pm.expect(requestBody.emailUsuario).to.match(/^[a-z0-9@.]+$/i);\r",
+							"    pm.expect(requestBody.descripcionTipoVia).to.match(/^[a-z0-9\\s]+$/i);\r",
+							"    pm.expect(requestBody.aplicativo).to.match(/^[a-z0-9]+$/i);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipoEnvio\": \"1\",\r\n    \"tipoProducto\": \"4\",\r\n    \"indicativo\": \"57\",\r\n    \"tipoDocumento\": \"13\",\r\n    \"email\": \"ana@gmail.com\",\r\n    \"personaEntrega\": \"1\",\r\n    \"indicativoEntrega\": \"57\",\r\n    \"medidasAproximadas\": [\r\n        {   \r\n            \"id\": 2,\r\n            \"tipoPaq\": \"Par de zapatos\",\r\n            \"nombrePaq\": \"Par de za...\",\r\n            \"cantidad\": 1\r\n        }\r\n    ],\r\n    \"ciudad\": \"Envigado (Ant)\",\r\n    \"via\": \"\",\r\n    \"numero\": \"\",\r\n    \"detalle\": \"PARQUE SAN JOSE BOD 14\",\r\n    \"tipoVia\": 16,\r\n    \"nombres\": \"prueba\",\r\n    \"apellidos\": \"prueba1\",\r\n    \"documento\": \"1036149000\",\r\n    \"celular\": \"3005777777\",\r\n    \"ciudadDetalle\": {\r\n        \"nombre_terminal_operativa\": \"Medellin\",\r\n        \"tipo_servicio\": \"A\",\r\n        \"dane_ciudad\": \"05266\",\r\n        \"dane_actual\": \"05266000\",\r\n        \"ciudad_tarifa\": \"05266000\",\r\n        \"sms\": true,\r\n        \"cubre_mqp\": true,\r\n        \"codigo_postal\": \"055428\",\r\n        \"terminal_operativa\": 2,\r\n        \"cubre_me\": true,\r\n        \"area_telefono\": 4,\r\n        \"observaciones2\": \"FCE - RD - FD - RCE\",\r\n        \"codigo\": \"05266000\",\r\n        \"tipo_poblacion\": \"D\",\r\n        \"activo\": true,\r\n        \"codigo_terminal\": 2,\r\n        \"codigo_interno\": 204,\r\n        \"mensajeria\": true,\r\n        \"cubre_mm\": false,\r\n        \"departamento\": \"05\",\r\n        \"cubre_cm\": false,\r\n        \"nombre\": \"Envigado (Ant)\",\r\n        \"abreviado\": \"ENVIGADO\",\r\n        \"nombre_terminal\": \"Medellin\",\r\n        \"observaciones\": \"\"\r\n    },\r\n    \"direccion\":\"cl 10#10 20\",\r\n    \"fechaRecogida\": \"2024-02-07\",\r\n    \"nombreEntrega\": \"prueba1\",\r\n    \"apellidosEntrega\": \"prueba1\",\r\n    \"celularEntrega\": \"3045677777\",\r\n    \"emailUsuario\": \"anar.7@gmail.com\",\r\n    \"descripcionTipoVia\": \"3045677777\",\r\n    \"aplicativo\": \"envios\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiv2-test.coordinadora.com/recogidas/cm-solicitud-recogidas-ms/solicitud-recogida",
+					"protocol": "https",
+					"host": [
+						"apiv2-test",
+						"coordinadora",
+						"com"
+					],
+					"path": [
+						"recogidas",
+						"cm-solicitud-recogidas-ms",
+						"solicitud-recogida"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "coordinadora Apis codigo 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipoEnvio\": \"1\",\r\n    \"tipoProducto\": \"4\",\r\n    \"indicativo\": \"57\",\r\n    \"tipoDocumento\": \"13\",\r\n    \"email\": \"ana@gmail.com\",\r\n    \"personaEntrega\": \"1\",\r\n    \"indicativoEntrega\": \"57\",\r\n    \"medidasAproximadas\": [\r\n        {   \r\n            \"id\": 2,\r\n            \"tipoPaq\": \"Par de zapatos\",\r\n            \"nombrePaq\": \"Par de za...\",\r\n            \"cantidad\": 1\r\n        }\r\n    ],\r\n    \"ciudad\": \"Envigado (Ant)\",\r\n    \"via\": \"\",\r\n    \"numero\": \"\",\r\n    \"detalle\": \"PARQUE SAN JOSE BOD 14\",\r\n    \"tipoVia\": 16,\r\n    \"nombres\": \"prueba\",\r\n    \"apellidos\": \"prueba1\",\r\n    \"documento\": \"1036149000\",\r\n    \"celular\": \"3005777777\",\r\n    \"ciudadDetalle\": {\r\n        \"nombre_terminal_operativa\": \"Medellin\",\r\n        \"tipo_servicio\": \"A\",\r\n        \"dane_ciudad\": \"05266\",\r\n        \"dane_actual\": \"05266000\",\r\n        \"ciudad_tarifa\": \"05266000\",\r\n        \"sms\": true,\r\n        \"cubre_mqp\": true,\r\n        \"codigo_postal\": \"055428\",\r\n        \"terminal_operativa\": 2,\r\n        \"cubre_me\": true,\r\n        \"area_telefono\": 4,\r\n        \"observaciones2\": \"FCE - RD - FD - RCE\",\r\n        \"codigo\": \"05266000\",\r\n        \"tipo_poblacion\": \"D\",\r\n        \"activo\": true,\r\n        \"codigo_terminal\": 2,\r\n        \"codigo_interno\": 204,\r\n        \"mensajeria\": true,\r\n        \"cubre_mm\": false,\r\n        \"departamento\": \"05\",\r\n        \"cubre_cm\": false,\r\n        \"nombre\": \"Envigado (Ant)\",\r\n        \"abreviado\": \"ENVIGADO\",\r\n        \"nombre_terminal\": \"Medellin\",\r\n        \"observaciones\": \"\"\r\n    },\r\n    \"direccion\":\"CL 20 #20 30\",\r\n    \"fechaRecogida\": \"2024-02-5\",\r\n    \"nombreEntrega\": \"prueba1\",\r\n    \"apellidosEntrega\": \"prueba1\",\r\n    \"celularEntrega\": \"3045677777\",\r\n    \"emailUsuario\": \"anar.7@gmail.com\",\r\n    \"descripcionTipoVia\": \"3045677777\",\r\n    \"aplicativo\": \"envios\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiv2-test.coordinadora.com/recogidas/cm-solicitud-recogidas-ms/solicitud-recogida",
+					"protocol": "https",
+					"host": [
+						"apiv2-test",
+						"coordinadora",
+						"com"
+					],
+					"path": [
+						"recogidas",
+						"cm-solicitud-recogidas-ms",
+						"solicitud-recogida"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "coordinadora pruebas mensaj 1 2 y 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//VALIDACIÓN 1\r",
+							"pm.test(\"Validación de campo dirección - Requerido y Alfanumérico\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"isError\", true);\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData).to.have.property(\"code\", \"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.include(\"\\\"direccion\\\" is not allowed to be empty\");\r",
+							"});\r",
+							"\r",
+							"// 2 VALIDACIÓN\r",
+							"\r",
+							"pm.test(\"Validación de campo fechaRecogida - Formato y Obligatoriedad\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect([jsonData.message]).to.include.oneOf([\r",
+							"        \"Cannot read properties of undefined (reading 'trim')\",\r",
+							"        \"Los valores de entrada no son correctos.\"\r",
+							"    ]);\r",
+							"    pm.expect([jsonData.code]).to.include.oneOf([\"UNKNOWN_ERROR\", \"BAD_MESSAGE\"]);\r",
+							"    if (jsonData.code === \"UNKNOWN_ERROR\") {\r",
+							"        pm.expect(jsonData.cause).to.eql(\"Default translator error\");\r",
+							"    } else if (jsonData.code === \"BAD_MESSAGE\") {\r",
+							"        pm.expect(jsonData.cause).to.include(\"\\\"fechaRecogida\\\" is not allowed to be empty\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACIÓN 3\r",
+							"\r",
+							"pm.test(\"Validación de campo fechaRecogida - Fecha dentro de los 5 días hábiles siguientes\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    var { message, idRecogidaAnterior, recogida_anterior } = jsonData.data;\r",
+							"    pm.expect(message).to.include(\"no debe ser mayor a la fecha\");\r",
+							"    pm.expect(idRecogidaAnterior).to.include(\"no debe ser mayor a la fecha\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACION 4\r",
+							"\r",
+							"pm.test(\"Validación de solicitud duplicada para fechaRecogida y dirección\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    var errorMessage = jsonData.data.message;\r",
+							"    pm.expect(errorMessage).to.eql(\"Error, Ya existe una recogida programada para hoy\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACIÓN 5\r",
+							"\r",
+							"pm.test(\"Validación de campo nombreEntrega - Obligatorio y Alfanumérico\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect(jsonData.message).to.eql(\"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData.code).to.eql(\"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.eql(\"\\\"nombreEntrega\\\" is not allowed to be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACIÓN 6\r",
+							"\r",
+							"pm.test(\"Validación de campo apellidosEntrega - Obligatorio y Alfanumérico\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect(jsonData.message).to.eql(\"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData.code).to.eql(\"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.eql(\"\\\"apellidosEntrega\\\" is not allowed to be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACIÓN 7\r",
+							"\r",
+							"pm.test(\"Validación de campo celularEntrega - Obligatorio y Alfanumérico\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect(jsonData.message).to.eql(\"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData.code).to.eql(\"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.eql(\"\\\"celularEntrega\\\" is not allowed to be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"//VALIDACIÓN 8\r",
+							"\r",
+							"pm.test(\"Validación de campo emailUsuario - Obligatorio y Formato de Email\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect(jsonData.message).to.eql(\"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData.code).to.eql(\"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.satisfy(function(cause) {\r",
+							"        return cause === \"\\\"emailUsuario\\\" is not allowed to be empty\" || cause === \"\\\"emailUsuario\\\" must be a valid email\";\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"//VALIDACIÓN 9\r",
+							"\r",
+							"pm.test(\"Validación de campo descripcionTipoVia - Obligatorio y Alfanumérico\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect(jsonData.message).to.eql(\"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData.code).to.eql(\"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.eql(\"\\\"descripcionTipoVia\\\" is not allowed to be empty\");\r",
+							"});\r",
+							"\r",
+							"//VALIDACIÓN 10\r",
+							"\r",
+							"pm.test(\"Validación de campo aplicativo - Obligatorio y Alfanumérico\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.isError).to.be.true;\r",
+							"    pm.expect(jsonData.message).to.eql(\"Los valores de entrada no son correctos.\");\r",
+							"    pm.expect(jsonData.code).to.eql(\"BAD_MESSAGE\");\r",
+							"    pm.expect(jsonData.cause).to.eql(\"\\\"aplicativo\\\" must be one of \");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipoEnvio\": \"1\",\r\n    \"tipoProducto\": \"4\",\r\n    \"indicativo\": \"57\",\r\n    \"tipoDocumento\": \"13\",\r\n    \"email\": \"ana@gmail.com\",\r\n    \"personaEntrega\": \"1\",\r\n    \"indicativoEntrega\": \"57\",\r\n    \"medidasAproximadas\": [\r\n        {   \r\n            \"id\": 2,\r\n            \"tipoPaq\": \"Par de zapatos\",\r\n            \"nombrePaq\": \"Par de za...\",\r\n            \"cantidad\": 1\r\n        }\r\n    ],\r\n    \"ciudad\": \"Envigado (Ant)\",\r\n    \"via\": \"\",\r\n    \"numero\": \"\",\r\n    \"detalle\": \"PARQUE SAN JOSE BOD 14\",\r\n    \"tipoVia\": 16,\r\n    \"nombres\": \"prueba\",\r\n    \"apellidos\": \"prueba1\",\r\n    \"documento\": \"1036149000\",\r\n    \"celular\": \"3005777777\",\r\n    \"ciudadDetalle\": {\r\n        \"nombre_terminal_operativa\": \"Medellin\",\r\n        \"tipo_servicio\": \"A\",\r\n        \"dane_ciudad\": \"05266\",\r\n        \"dane_actual\": \"05266000\",\r\n        \"ciudad_tarifa\": \"05266000\",\r\n        \"sms\": true,\r\n        \"cubre_mqp\": true,\r\n        \"codigo_postal\": \"055428\",\r\n        \"terminal_operativa\": 2,\r\n        \"cubre_me\": true,\r\n        \"area_telefono\": 4,\r\n        \"observaciones2\": \"FCE - RD - FD - RCE\",\r\n        \"codigo\": \"05266000\",\r\n        \"tipo_poblacion\": \"D\",\r\n        \"activo\": true,\r\n        \"codigo_terminal\": 2,\r\n        \"codigo_interno\": 204,\r\n        \"mensajeria\": true,\r\n        \"cubre_mm\": false,\r\n        \"departamento\": \"05\",\r\n        \"cubre_cm\": false,\r\n        \"nombre\": \"Envigado (Ant)\",\r\n        \"abreviado\": \"ENVIGADO\",\r\n        \"nombre_terminal\": \"Medellin\",\r\n        \"observaciones\": \"\"\r\n    },\r\n    \"direccion\":\"CL 20 #20 30\",\r\n    \"fechaRecogida\": \"2024-02-01\",\r\n    \"nombreEntrega\": \"prueba1\",\r\n    \"apellidosEntrega\": \"prueba1\",\r\n    \"celularEntrega\": \"3045677777\",\r\n    \"emailUsuario\": \"anar.7@gmail.com\",\r\n    \"descripcionTipoVia\": \"3045677777\",\r\n    \"aplicativo\": \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiv2-test.coordinadora.com/recogidas/cm-solicitud-recogidas-ms/solicitud-recogida",
+					"protocol": "https",
+					"host": [
+						"apiv2-test",
+						"coordinadora",
+						"com"
+					],
+					"path": [
+						"recogidas",
+						"cm-solicitud-recogidas-ms",
+						"solicitud-recogida"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
